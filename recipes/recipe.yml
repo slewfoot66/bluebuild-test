@@ -1,5 +1,18 @@
-name: test-image
-description: Local test image
-base-image: ghcr.io/ublue-os/silverblue-main
+name: my-zirconium
+description: Zirconium plus my apps
+base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
-modules: []
+modules:
+  - type: dnf
+    install:
+      packages:
+        - kitty
+        - onboard
+
+  - type: default-flatpaks
+    configurations:
+      - notify: true
+        scope: system
+        install:
+          - org.mozilla.firefox
+          - com.google.Chrome
