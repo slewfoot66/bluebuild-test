@@ -1,0 +1,5 @@
+name: test-image
+description: Local test image
+base-image: ghcr.io/ublue-os/silverblue-main
+image-version: latest
+modules: []
