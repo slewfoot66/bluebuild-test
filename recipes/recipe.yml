@@ -9,10 +9,11 @@ modules:
   # Use rpm-ostree to bridge the custom Copr repository infrastructure
   - type: rpm-ostree
     repos:
+      # MUST point directly to the raw .repo resource file
       - https://fedorainfracloud.org
     install:
       - kitty
-      - squeekboard                  # Resolves perfectly now via the mobile copr layer
+      - squeekboard                  
 
 
   # Deploy your custom wide desktop yaml layout to the system profile
