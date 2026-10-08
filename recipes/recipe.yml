@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# yaml-language-server: $schema=https://blue-build.org
 
 name: my-zirconium
 description: Zirconium plus my apps
@@ -6,13 +6,16 @@ base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
 
 modules:
-  - type: dnf
+  # Use rpm-ostree to bridge the custom Copr repository infrastructure
+  - type: rpm-ostree
+    repos:
+      - https://fedorainfracloud.org
     install:
-      packages:
-        - kitty
-        - squeekboard
+      - kitty
+      - squeekboard                  # Resolves perfectly now via the mobile copr layer
 
-  # Corrected BlueBuild files module configuration
+
+  # Deploy your custom wide desktop yaml layout to the system profile
   - type: files
     files:
       - src: usr/share/squeekboard/keyboards/terminal/us.yaml
