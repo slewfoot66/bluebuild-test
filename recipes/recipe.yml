@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+
 name: my-zirconium
 description: Zirconium plus my apps
 base-image: ghcr.io/zirconium-dev/zirconium
@@ -9,12 +11,12 @@ modules:
       packages:
         - kitty
         - squeekboard
-        - gsettings-desktop-schemas
 
-  # Automatically deploy your wide desktop yaml layout to the system profile
+  # Corrected BlueBuild files module configuration
   - type: files
-    globs:
-      - usr/share/squeekboard/keyboards/terminal/us.yaml
+    files:
+      - src: usr/share/squeekboard/keyboards/terminal/us.yaml
+        dest: /usr/share/squeekboard/keyboards/terminal/us.yaml
 
   # Automatically enable the screen keyboard system flag on boot
   - type: gschema-overrides
