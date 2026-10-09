@@ -21,4 +21,4 @@ modules:
         install:
           - org.mozilla.firefox
           - com.google.Chrome
-          - cc.cubocore.CoreKeyboard
+          - org.cubocore.CoreKeyboard
