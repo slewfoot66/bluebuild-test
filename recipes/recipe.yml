@@ -6,10 +6,10 @@ base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
 
 modules:
-  # Use rpm-ostree to bridge the custom Copr repository infrastructure
+  # Explicitly using rpm-ostree module tracking parameters
   - type: rpm-ostree
+    no-cache: true     # Bypasses the sticky build container layer cache completely
     repos:
-      # MUST point directly to the raw .repo resource file
       - https://fedorainfracloud.org
     install:
       - kitty
