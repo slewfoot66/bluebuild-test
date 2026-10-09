@@ -4,28 +4,13 @@ name: my-zirconium
 description: Zirconium plus my apps
 base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
-
 modules:
-  # Explicitly using rpm-ostree module tracking parameters
-  - type: rpm-ostree
-    no-cache: true     # Bypasses the sticky build container layer cache completely
-    repos:
-      - https://fedorainfracloud.org
+  - type: dnf
     install:
-      - kitty
-      - squeekboard                  
-
-
-  # Deploy your custom wide desktop yaml layout to the system profile
-  - type: files
-    files:
-      - src: usr/share/squeekboard/keyboards/terminal/us.yaml
-        dest: /usr/share/squeekboard/keyboards/terminal/us.yaml
-
-  # Automatically enable the screen keyboard system flag on boot
-  - type: gschema-overrides
-    include:
-      - 01-squeekboard.gschema.override
+      packages:
+        - kitty
+        - python3-uinput
+        - steam-devices
 
   - type: default-flatpaks
     configurations:
