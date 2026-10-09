@@ -12,6 +12,7 @@ modules:
         - python3-uinput
         - steam-devices
         - python3-setuptools
+        - Florence
 
   - type: default-flatpaks
     configurations:
