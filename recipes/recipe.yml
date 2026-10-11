@@ -13,6 +13,7 @@ modules:
         - steam-devices
         - python3-setuptools
         - python3-xlib
+        - gtk-layer-shell
 
   - type: default-flatpaks
     configurations:
