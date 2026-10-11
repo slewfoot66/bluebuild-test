@@ -12,7 +12,7 @@ modules:
         - python3-uinput
         - steam-devices
         - python3-setuptools
-        - stevia
+        - python3-xlib
 
   - type: default-flatpaks
     configurations:
