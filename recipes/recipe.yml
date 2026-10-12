@@ -2,7 +2,7 @@
 
 name: my-zirconium
 description: Zirconium plus my apps
-base-image: ghcr.io/zirconium-dev/zirconium-nvidia:latest
+base-image: ghcr.io/zirconium-dev/zirconium-nvidia
 image-version: latest
 modules:
   - type: dnf
