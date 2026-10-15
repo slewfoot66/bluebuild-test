@@ -19,7 +19,7 @@ modules:
         - python3-pip
         - pipewire-utils
         - wtype
-        - SOX
+        - sox
 
   - type: default-flatpaks
     configurations:
