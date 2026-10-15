@@ -16,6 +16,10 @@ modules:
         - gtk-layer-shell
         - ydotool
         - qt6-qtwayland
+        - python3-pip
+        - pipewire-utils
+        - wtype
+        - SOX
 
   - type: default-flatpaks
     configurations:
