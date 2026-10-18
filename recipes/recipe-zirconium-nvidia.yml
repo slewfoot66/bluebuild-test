@@ -12,8 +12,10 @@ modules:
         - che/nerd-fonts          # ← MUST be owner/project
       keys:
         - https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+        - https://dl.google.com/linux/linux_signing_key.pub
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+        - https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome.repo
     install:
       packages:
         - kitty
