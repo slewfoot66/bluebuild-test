@@ -15,7 +15,7 @@ modules:
         - https://dl.google.com/linux/linux_signing_key.pub
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-        - https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome.repo
+        - /ctx/files/repos/google-chrome.repo      # ← LOCAL file instead of URL
     install:
       packages:
         - kitty
