@@ -1,26 +1,43 @@
-# yaml-language-server: $schema=https://blue-build.org
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 
 name: my-zirconium-nvidia
 description: zirconium-nvidia.yml plus my apps
 base-image: ghcr.io/zirconium-dev/zirconium-nvidia
 image-version: latest
+
 modules:
   - type: dnf
+    repos:
+      # COPR repositories (user/project format)
+      copr:
+
+      che/nerd-fonts
+
+      
+      # GPG keys to import
+      keys:
+        - https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+      
+      # Standard .repo files or RPM repo packages
+      files:
+        - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    
     install:
       packages:
-        - kitty
+        # Original packages
+       - kitty
         - python3-uinput
-        - steam-devices
         - python3-setuptools
         - python3-xlib
         - gtk-layer-shell
         - ydotool
         - qt6-qtwayland
         - python3-pip
-        - pipewire-utils
-        - wtype
         - sox
         - pulseaudio-utils
+        # Packages from added repos
+        - che/nerd-fonts       # from COPR che/nerd-fonts
+        - brave-browser        # from brave repo
 
   - type: default-flatpaks
     configurations:
