@@ -12,10 +12,10 @@ modules:
         - che/nerd-fonts          # ← MUST be owner/project
       keys:
         - https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-        - https://dl.google.com/linux/linux_signing_key.pub
+
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-        - /ctx/files/repos/google-chrome.repo      # ← LOCAL file instead of URL
+
     install:
       packages:
         - kitty
@@ -23,7 +23,8 @@ modules:
         - python3-setuptools
         - python3-xlib
         - gtk-layer-shell
-        - google-chrome-beta
+ # Install Chrome Beta directly from Google's always-current RPM URL
+        - https://dl.google.com/linux/direct/google-chrome-beta_current_x86_64.rpm
         - ydotool
         - qt6-qtwayland
         - python3-pip
