@@ -8,24 +8,15 @@ image-version: latest
 modules:
   - type: dnf
     repos:
-      # COPR repositories (user/project format)
       copr:
-
-      che/nerd-fonts
-
-      
-      # GPG keys to import
+        - nerd-fonts
       keys:
         - https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-      
-      # Standard .repo files or RPM repo packages
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-    
     install:
       packages:
-        # Original packages
-       - kitty
+        - kitty
         - python3-uinput
         - python3-setuptools
         - python3-xlib
@@ -35,9 +26,7 @@ modules:
         - python3-pip
         - sox
         - pulseaudio-utils
-        # Packages from added repos
-        - che/nerd-fonts       # from COPR che/nerd-fonts
-        - brave-browser        # from brave repo
+        - brave-browser
 
   - type: default-flatpaks
     configurations:
