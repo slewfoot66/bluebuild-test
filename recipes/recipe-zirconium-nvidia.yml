@@ -9,7 +9,7 @@ modules:
   - type: dnf
     repos:
       copr:
-        - nerd-fonts
+        - che/nerd-fonts          # ← MUST be owner/project
       keys:
         - https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
       files:
@@ -27,6 +27,7 @@ modules:
         - sox
         - pulseaudio-utils
         - brave-browser
+        - nerd-fonts              # ← actual RPM package name from che/nerd-fonts
 
   - type: default-flatpaks
     configurations:
