@@ -23,6 +23,7 @@ modules:
         - python3-setuptools
         - python3-xlib
         - gtk-layer-shell
+        - qt6-qtvirtualkeyboard
  # Install Chrome Beta directly from Google's always-current RPM URL
         - https://dl.google.com/linux/direct/google-chrome-beta_current_x86_64.rpm
         - ydotool
