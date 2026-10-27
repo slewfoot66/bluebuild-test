@@ -34,6 +34,10 @@ modules:
         - pulseaudio-utils
         - brave-browser
         - nerd-fonts              # ← actual RPM package name from che/nerd-fonts
+        - virt-manager
+        - qemu-kvm
+        - libvirt
+        - swtpm
 
   - type: default-flatpaks
     configurations:
