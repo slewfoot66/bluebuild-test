@@ -36,6 +36,7 @@ modules:
         - nerd-fonts              # ← actual RPM package name from che/nerd-fonts
         - virt-manager
         - virt-viewer
+        - virt-install
         - qemu-kvm
         - libvirt
         - swtpm
