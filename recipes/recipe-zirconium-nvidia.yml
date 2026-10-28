@@ -35,6 +35,7 @@ modules:
         - brave-browser
         - nerd-fonts              # ← actual RPM package name from che/nerd-fonts
         - virt-manager
+        - virt-viewer
         - qemu-kvm
         - libvirt
         - swtpm
