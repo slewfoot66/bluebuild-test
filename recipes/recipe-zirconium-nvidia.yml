@@ -37,6 +37,7 @@ modules:
         - virt-manager
         - virt-viewer
         - virt-install
+        - dbus-daemon
         - qemu-kvm
         - libvirt
         - swtpm
