@@ -1,19 +1,17 @@
 name: bluebuild
 on:
   schedule:
-    - cron:
-        "00 06 * * *" # build at 06:00 UTC every day
-        # (20 minutes after last ublue images start building)
+    - cron: "00 06 * * *" # build at 06:00 UTC every day
   push:
-    paths-ignore: # don't rebuild if only documentation has changed
+    paths-ignore:
       - "**.md"
-
   pull_request:
-  workflow_dispatch: # allow manually triggering builds
+  workflow_dispatch:
+
 concurrency:
-  # only run one build at a time
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
   cancel-in-progress: true
+
 jobs:
   bluebuild:
     name: Build Custom Image
@@ -23,15 +21,15 @@ jobs:
       packages: write
       id-token: write
     strategy:
-      fail-fast: false # stop GH from cancelling all matrix builds if one fails
+      fail-fast: false
       matrix:
         recipe:
-          # !! Add your recipes here
           - recipe.yml
           - recipe-zirconium-nvidia.yml
     steps:
-      # the build is fully handled by the reusable github action
-      - name: Build Custom Image
+      - name: Build Custom Image (Attempt 1)
+        id: build1
+        continue-on-error: true
         uses: blue-build/github-action@v1.13
         with:
           recipe: ${{ matrix.recipe }}
@@ -39,6 +37,50 @@ jobs:
           cosign_private_key: ${{ secrets.SIGNING_SECRET }}
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
-
-          # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: false
+
+      - name: Wait before retry
+        if: steps.build1.outcome == 'failure'
+        run: sleep 60
+
+      - name: Build Custom Image (Attempt 2)
+        id: build2
+        if: steps.build1.outcome == 'failure'
+        continue-on-error: true
+        uses: blue-build/github-action@v1.13
+        with:
+          recipe: ${{ matrix.recipe }}
+          build_opts: --run-driver=podman --build-driver=podman
+          cosign_private_key: ${{ secrets.SIGNING_SECRET }}
+          registry_token: ${{ github.token }}
+          pr_event_number: ${{ github.event.number }}
+          maximize_build_space: false
+
+      - name: Wait before final retry
+        if: steps.build1.outcome == 'failure' && steps.build2.outcome == 'failure'
+        run: sleep 120
+
+      - name: Build Custom Image (Attempt 3)
+        id: build3
+        if: steps.build1.outcome == 'failure' && steps.build2.outcome == 'failure'
+        uses: blue-build/github-action@v1.13
+        with:
+          recipe: ${{ matrix.recipe }}
+          build_opts: --run-driver=podman --build-driver=podman
+          cosign_private_key: ${{ secrets.SIGNING_SECRET }}
+          registry_token: ${{ github.token }}
+          pr_event_number: ${{ github.event.number }}
+          maximize_build_space: true
+
+      - name: Check final status
+        if: always()
+        run: |
+          if [[ "${{ steps.build1.outcome }}" == "success" ]] || \
+             [[ "${{ steps.build2.outcome }}" == "success" ]] || \
+             [[ "${{ steps.build3.outcome }}" == "success" ]]; then
+            echo "✅ Build succeeded"
+            exit 0
+          else
+            echo "❌ Build failed after 3 attempts"
+            exit 1
+          fi
