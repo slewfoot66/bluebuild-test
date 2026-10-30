@@ -2,7 +2,7 @@
 
 name: my-zirconium-nvidia
 description: zirconium-nvidia.yml plus my apps
-base-image: ghcr.io/zirconium-dev/zirconium-nvidia
+base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
 
 modules:
